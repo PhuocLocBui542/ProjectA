@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ff74a4066ad0242bd535e585b4cd96, type: 3}
+  m_Name: Armor Poision
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: Armor flask
+  itemIcon: {fileID: -165920498, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  dropChance: 0
+  equipmentType: 3
+  itemCooldown: 15
+  itemEffects:
+  - {fileID: 11400000, guid: 6fde0cf55bc06954cb20c043cf105cff, type: 2}
+  - {fileID: 11400000, guid: 1e82e0110e4bbe144850c8c1b921e6c9, type: 2}
+  strengh: 0
+  agility: 0
+  intelligence: 0
+  vitality: 0
+  damage: 0
+  critRate: 0
+  critDamage: 0
+  maxHealth: 0
+  armor: 0
+  evasion: 0
+  magicResistance: 0
+  fireDmg: 0
+  iceDmg: 0
+  lightningDmg: 0
+  crafttingMaterial:
+  - data: {fileID: 11400000, guid: 99b69302df5f017498397499072699cc, type: 2}
+    stackSize: 3

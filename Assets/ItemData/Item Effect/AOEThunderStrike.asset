@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b43da4dac16db94f9ede41355ea630b, type: 3}
+  m_Name: AOEThunderStrike
+  m_EditorClassIdentifier: 
+  effectDescription: Summon a thunder
+  thunderStrikePrefabs: {fileID: 8080526207601707843, guid: f1ff66a6fb720d84ab67be1c3cbe916c, type: 3}

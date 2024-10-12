@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002e55ec2ed87ff4d8d41a33a17982bf, type: 3}
+  m_Name: Ice and Fire effect
+  m_EditorClassIdentifier: 
+  effectDescription: random fire and ice effecct to make dmg
+  iceAndFirePrefab: {fileID: 7097529382685608145, guid: 3472ddf2080063e44bfc739e549b71c0, type: 3}
+  xVelocity: 10
