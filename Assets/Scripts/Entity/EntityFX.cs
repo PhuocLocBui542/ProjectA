@@ -30,10 +30,12 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private GameObject hitFx;
     [SerializeField] private GameObject hitCritFx;
 
+    private GameObject healBar;
     protected virtual void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         orMat = sr.material;
+        healBar = GetComponentInChildren<HeathBar_UI>().gameObject;
     }
 
     public void CreatePopUpText(string _text)
@@ -50,8 +52,15 @@ public class EntityFX : MonoBehaviour
     public void MakeTransprent(bool _transprent)
     {
         if (_transprent)
+        {
+            healBar.SetActive(false);
             sr.color = Color.clear;
-        else sr.color = Color.white;
+        }
+        else
+        {
+            healBar.SetActive(true);
+            sr.color = Color.white;
+        }
     }
 
     private IEnumerator FlashFX()

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public enum StatType
@@ -108,6 +106,9 @@ public class CharacterStats : MonoBehaviour
     public virtual void DoDamage(CharacterStats _targetStats)
     {
         bool criticalStrike = false;
+
+        if (_targetStats.isInvincible)
+            return;
 
         if (TargetCanAvoidAttack(_targetStats))
             return;
@@ -221,8 +222,8 @@ public class CharacterStats : MonoBehaviour
 
     private void HitNearestTargetWithShockStrike()
     {
-        if (GetComponent<Player>() != null)
-            return;
+        /*if (GetComponent<Player>() != null)
+            return;*/
 
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, 25);
 
