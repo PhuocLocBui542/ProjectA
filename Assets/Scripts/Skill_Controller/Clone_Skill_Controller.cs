@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Clone_Skill_Controller : MonoBehaviour
@@ -13,15 +12,21 @@ public class Clone_Skill_Controller : MonoBehaviour
     private float atkMultiplier;
     [SerializeField] private Transform atkCheck;
     [SerializeField] private float atkRadius = .8f;
-    private Transform closeEnemy;
     private int facingDir = -1;
 
     private float changetoDuplicate;
     private bool canDuplicate;
+
+    [Space]
+    [SerializeField] private LayerMask whatIsEnemy;
+    [SerializeField] private float closestEnemyCheckRadius = 25;
+    [SerializeField] private Transform closestEnemy;
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        StartCoroutine(FaceCloneTarget());
     }
     private void Update()
     {
@@ -33,7 +38,7 @@ public class Clone_Skill_Controller : MonoBehaviour
                 Destroy(gameObject);
         }
     }
-    public void SetupClone(Transform _newTranform, float cloneDur, bool _canAttack, Vector3 _offset, Transform _closestEnemy, bool _canDuplicate, float _changetoDuplicate, Player _player, float _atkMultiplier)
+    public void SetupClone(Transform _newTranform, float cloneDur, bool _canAttack, Vector3 _offset, bool _canDuplicate, float _changetoDuplicate, Player _player, float _atkMultiplier)
     {
         if (_canAttack)
         {
@@ -44,10 +49,9 @@ public class Clone_Skill_Controller : MonoBehaviour
         player = _player;
         transform.position = _newTranform.position + _offset;
         cloneTimer = cloneDur;
-        closeEnemy = _closestEnemy;
         canDuplicate = _canDuplicate;
         changetoDuplicate = _changetoDuplicate;
-        FaceCloneTarget();
+
     }
 
     private void AnimationTrigger()
@@ -90,15 +94,43 @@ public class Clone_Skill_Controller : MonoBehaviour
         }
     }
 
-    private void FaceCloneTarget()
+    private IEnumerator FaceCloneTarget()
     {
-        if (closeEnemy != null)
+        yield return null;
+
+        FindClosestEnemy();
+
+        if (closestEnemy != null)
         {
-            if (transform.position.x > closeEnemy.position.x)
+            if (transform.position.x > closestEnemy.position.x)
             {
                 facingDir = -1;
                 transform.Rotate(0, 180, 0);
             }
         }
+    }
+
+    private void FindClosestEnemy()
+    {
+        Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, closestEnemyCheckRadius, whatIsEnemy);
+
+        float cloneDistance = Mathf.Infinity;
+
+        foreach (var hit in collider2D)
+        { 
+            float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
+
+            if (distanceToEnemy < cloneDistance)
+            {
+                cloneDistance = distanceToEnemy;
+                closestEnemy = hit.transform;
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, closestEnemyCheckRadius);
     }
 }
