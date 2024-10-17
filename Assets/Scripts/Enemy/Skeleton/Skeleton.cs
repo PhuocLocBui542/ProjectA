@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Skeleton : Enemy
 {
+    public float distanceToPlayer;
 
     #region State
     public SkeletonIdleState idleState { get; private set; }
@@ -18,7 +19,7 @@ public class Skeleton : Enemy
         base.Awake();
         idleState = new SkeletonIdleState(stateMachine, this, "Idle",this);
         moveState = new SkeletonMoveState(stateMachine, this, "Move",this);
-        battleState = new SkeletonBattleState(stateMachine, this, "Move", this);
+        battleState = new SkeletonBattleState(stateMachine, this, "Battle", this);
         attackState = new SkeletonAttackState(stateMachine, this, "Attack", this);
 
         stunnedState = new SkeletonStunnedState(stateMachine, this, "Stunned", this);
@@ -34,10 +35,8 @@ public class Skeleton : Enemy
     protected override void Update()
     {
         base.Update();
-        /*if (Input.GetKeyDown(KeyCode.U))
-        {
-            stateMachine.ChangeState(stunnedState);
-        }*/
+
+        distanceToPlayer = IsPlayerDetected().distance;
     }
 
     public override void Die()

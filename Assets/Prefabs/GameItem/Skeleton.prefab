@@ -15021,6 +15021,7 @@ MonoBehaviour:
   lasttimeAtk: 0
   stunDuration: 1
   stunDirection: {x: 7, y: 12}
+  distanceToPlayer: 0
 --- !u!114 &2183403776666656899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15075,10 +15076,10 @@ MonoBehaviour:
     baseValue: 10
     modifiers: 
   damage:
-    baseValue: 10
+    baseValue: 5
     modifiers: 
   critRate:
-    baseValue: 99
+    baseValue: 5
     modifiers: 
   critDamage:
     baseValue: 0
@@ -15112,7 +15113,7 @@ MonoBehaviour:
   currentHealth: 0
   isInvincible: 0
   soulsDropAmount:
-    baseValue: 0
+    baseValue: 50
     modifiers: 
   level: 1
   percantageModifier: 0.4
@@ -15144,13 +15145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37359bc438a7ae498f9fb9022d07cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleItemDrop: 2
-  possibleDrop:
+  maxItemsToDrop: 2
+  itemPool:
   - {fileID: 11400000, guid: 99b69302df5f017498397499072699cc, type: 2}
-  - {fileID: 11400000, guid: 8054c9560723fad43a068f02bdb5f6cb, type: 2}
   - {fileID: 11400000, guid: 7497e9a83fe2c854f96cb604570f4a5e, type: 2}
-  - {fileID: 11400000, guid: 64a4d8451df063b4a864156be07ca15a, type: 2}
-  - {fileID: 11400000, guid: 04f4897e078faad45ac93d5d6d8932bf, type: 2}
   dropPrefabs: {fileID: 2609604454228719620, guid: b4a64e003fd51ac43bb3bd832dddd9c7, type: 3}
 --- !u!1 &2183403777150050666
 GameObject:

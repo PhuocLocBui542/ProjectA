@@ -256,7 +256,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: 
   damage:
-    baseValue: 0
+    baseValue: 20
     modifiers: 
   critRate:
     baseValue: 0
@@ -338,8 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c37359bc438a7ae498f9fb9022d07cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possibleItemDrop: 0
-  possibleDrop: []
+  maxItemsToDrop: 0
+  itemPool: []
   dropPrefabs: {fileID: 2609604454228719620, guid: b4a64e003fd51ac43bb3bd832dddd9c7, type: 3}
 --- !u!114 &8798744046093335790
 MonoBehaviour:

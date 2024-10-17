@@ -15,7 +15,7 @@ public class Enemy : Entity
     public float idleTime = 2;
     public float battleTime = 7;
     private float defaultMoveSpeed;
-        
+
     [Header("Attack Info")]
     public float atkDistance = 2;
     public float atkCD = 2;
@@ -25,8 +25,8 @@ public class Enemy : Entity
 
     [Header("Stun Info")]
     public float stunDuration = 1;
-    public Vector2 stunDirection = new Vector2(10,12);
-    
+    public Vector2 stunDirection = new Vector2(10, 12);
+
     public EnemyStateMachine stateMachine { get; private set; }
     public EntityFX fx { get; private set; }
     protected override void Awake()
@@ -61,7 +61,20 @@ public class Enemy : Entity
         base.ReturnBaseSpeed();
         moveSpeed = defaultMoveSpeed;
     }
-    public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 20, whatIsPlayer);
+    public virtual RaycastHit2D IsPlayerDetected()
+    {
+        RaycastHit2D playerDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 20, whatIsPlayer);
+        RaycastHit2D wallDetected = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 20, whatIsGround);
+
+        if (wallDetected)
+        {
+            if (wallDetected.distance < playerDetected.distance)
+                return default(RaycastHit2D);
+        }
+
+        return playerDetected;
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -102,7 +115,7 @@ public class Enemy : Entity
         /*=======*/
         /*rb.gravityScale = 0;*/
         cd.enabled = false;
-        Invoke("RemoveBody",3);
+        Invoke("RemoveBody", 3);
     }
 
     private void RemoveBody()

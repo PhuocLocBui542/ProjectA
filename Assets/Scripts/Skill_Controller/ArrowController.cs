@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
+    private SpriteRenderer sr;
+
     [SerializeField] private int dmg;
     [SerializeField] private string targetLayerName = "Player";
 
@@ -14,14 +16,22 @@ public class ArrowController : MonoBehaviour
     [SerializeField] private bool flipped;
 
     private CharacterStats myStats;
+    private int facingDir = 1;
     private void Update()
     {
-        if(canMove)
-            rb.velocity = new Vector2(xVelocity, rb.velocity.y);        
+        if (canMove)
+            rb.velocity = new Vector2(xVelocity, rb.velocity.y);
+
+        if (facingDir == 1 && rb.velocity.x < 0)
+        {
+            facingDir = -1;
+            sr.flipX = true;
+        }
     }
 
     public void SetupArrow(float _speed, CharacterStats _myStats)
     {
+        sr = GetComponent<SpriteRenderer>();
         xVelocity = _speed;
         myStats = _myStats;
     }
@@ -48,7 +58,7 @@ public class ArrowController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         transform.parent = collision.transform;
 
-        Destroy(gameObject, Random.Range(5 ,7));
+        Destroy(gameObject, Random.Range(5, 7));
     }
 
     public void FlipArrow()
@@ -58,7 +68,7 @@ public class ArrowController : MonoBehaviour
 
         xVelocity = xVelocity * -1;
         flipped = true;
-        transform.Rotate(0,100,0);
+        transform.Rotate(0, 100, 0);
         targetLayerName = "Enemy";
     }
 }

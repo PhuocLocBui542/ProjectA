@@ -7,6 +7,8 @@ public class SkeletonBattleState : EnemyState
     private Skeleton enemy;
     private Transform player;
     private int moveDir;
+
+    private bool flippedOnce;
     public SkeletonBattleState(EnemyStateMachine _stateMachine, Enemy _enemyBase, string _animBoolName, Skeleton _enemy) : base(_stateMachine, _enemyBase, _animBoolName)
     {
         this.enemy = _enemy;
@@ -26,11 +28,15 @@ public class SkeletonBattleState : EnemyState
 
         if (player.GetComponent<PlayerStats>().isDead)
             stateMachine.ChangeState(enemy.moveState);
+
+        flippedOnce = false;
     }
 
     public override void Update()
     {
         base.Update();
+
+        enemy.anim.SetFloat("xVelocity", enemy.rb.velocity.x);
 
         if (enemy.IsPlayerDetected())
         {
@@ -45,9 +51,20 @@ public class SkeletonBattleState : EnemyState
         }
         else
         {
+            if (flippedOnce == false)
+            {
+                flippedOnce = true;
+                enemy.Flip();
+            }
+
             if (enemy.battleTime < 0 || Vector2.Distance(player.transform.position, enemy.transform.position) > 7)
                 stateMachine.ChangeState(enemy.idleState);
         }
+
+        float distanceToPlayerX = Mathf.Abs(player.position.x - enemy.transform.position.x);
+
+        if (distanceToPlayerX < .8f)
+            return;
 
         if (player.position.x > enemy.transform.position.x)
             moveDir = 1;
